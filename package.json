@@ -1,0 +1,22 @@
+{
+  "name": "ginko-bank",
+  "version": "1.0.0",
+  "description": "User bisa membuka 1 rekening dalam beberapa currency (USD, IDR, EURO, YEN, POUNDS)\r Admin bisa melihat semua rekening yang ada dan membekukan rekening yang dilaporkan polisi\r User bisa topup dan withdraw (dalam Rp saja , nanti di convert);\r User bisa melihat list transaksi (withdraw dan topup) dan download pdf;\r User bisa mengirimkan ke nomor rekening\r Setiap transfer captcha",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.3",
+    "sequelize-cli": "^6.6.2"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "sequelize": "^6.37.3"
+  }
+}
