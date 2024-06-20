@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
-const {User, Bio, Currency, Account} = require('../models/index');
+const {User, Bio, Currency, Account, Transfer} = require('../models/index');
 const {generateAccountNumber} = require('../helpers/helpers');
+const {Op} = require('sequelize');
 
 
 class Controller {
@@ -179,8 +180,12 @@ class Controller {
                 UserId: account.UserId
             }});
             //find the user then the bio;
-            
-            res.render('detailAccount', {account, bio});
+            const transfers = await Transfer.findAll({
+                where: {
+                    [Op.or]: [{ReceiverAccountNumber: accountNumber}, {AccountId: account.id}]
+                }
+            });
+            res.render('detailAccount', {account, bio, transfers});
         } catch(error) {
             console.log(error)
             res.send(error)
@@ -190,6 +195,9 @@ class Controller {
     static async renderTransfer(req, res) {
         try {
             //findout the currency
+            let {error} = req.query;
+            //handle error
+            error = error ? error : '';
             const {accountNumber} = req.params;
             const account = await Account.findOne({
                 where: {
@@ -197,7 +205,7 @@ class Controller {
                 },
                 include: Currency
             })
-            res.render('formTransfer', {account});
+            res.render('formTransfer', {account, error});
         } catch(error) {
             console.log(error)
             res.send(error)
@@ -206,12 +214,90 @@ class Controller {
 
     static async renderTopup(req, res) {
         try {
-            res.render('accountTopup');
+            const {accountNumber} = req.params;
+            const account = await Account.findOne({
+                where: {
+                    accountNumber
+                },
+                include: Currency
+            })
+            res.render('accountTopup', {account});
         } catch(error) {
             console.log(error)
             res.send(error)
         }
     }
+
+    static async topup(req, res) {
+        try {
+            //convert the inputted value
+            const {accountNumber} = req.params;
+            const {amount} = req.body;
+            const account = await Account.findOne({
+                where: {
+                    accountNumber
+                },
+                include: Currency
+            })
+            const convertedAmount = Math.floor(amount / account.Currency.idrValue);
+            await account.increment('amount', {by: convertedAmount});
+            res.redirect(`/user/account/${accountNumber}`)
+
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
+    
+    static async transfer(req, res) {
+        try {
+            const {ReceiverAccountNumber, amount, info} = req.body;
+            const {accountNumber} = req.params;
+            //findout if target exist
+            const account = await Account.findOne({
+                where: {
+                    accountNumber
+                }
+            })
+            const targetAccount = await Account.findOne({
+                where: {
+                    accountNumber: ReceiverAccountNumber
+                },
+                include: Currency
+            })
+
+            if (!targetAccount) {
+                const message = "No Rekening tidak ditemukan";
+                res.redirect(`/user/account/${accountNumber}/transfer?error=${message}`);
+            } else if (amount > account.amount) {
+                const message = "Saldo anda tidak mencukupi";
+                res.redirect(`/user/account/${accountNumber}/transfer?error=${message}`);
+            } else {
+                //success
+                //substract
+                account.decrement('amount', {by: amount});
+                //add
+                targetAccount.increment('amount', {by: amount});
+                //create transfer record
+                await Transfer.create({
+                    amount,
+                    type: 'Pengeluaran',
+                    info,
+                    CurrencyId: account.CurrencyId,
+                    AccountId: account.id,
+                    ReceiverAccountNumber
+                })
+                res.redirect(`/user/account/${accountNumber}`)
+            }
+            
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
+
+    
+    
 }
 
 module.exports = Controller;

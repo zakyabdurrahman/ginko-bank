@@ -106,10 +106,11 @@
 
 <div class="container">
     <h1>Transfer Dana dalam Mata Uang <%= account.Currency.code %></h1>
-    <form>
+    <p style="color: red"><%= error %></p>
+    <form method="post" action="/user/account/<%= account.accountNumber %>/transfer">
         <div class="form-group">
             <label for="norek">No Rekening Tujuan</label>
-            <input type="number" id="norek" name="norek" required>
+            <input type="number" id="norek" name="ReceiverAccountNumber" required>
         </div>
         <div class="form-group">
             <label for="amount">Jumlah</label>
@@ -117,7 +118,7 @@
         </div>
         <div class="form-group">
             <label for="keterangan">Keterangan</label>
-            <input type="text" id="keterangan" name="keterangan" required>
+            <input type="text" id="keterangan" name="info" required>
         </div>
         <div class="form-group">
             <button type="submit">Transfer</button>

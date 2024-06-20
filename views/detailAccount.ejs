@@ -56,14 +56,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                    <% transfers.forEach((transfer, i) => { %>
+                        <tr>
+                            <td><%= i + 1 %></td>
+                            <td><%= transfer.createdAt %></td>
+                            <td><%= transfer.type %></td>
+                            <td><%= transfer.amount %></td>
+                            <td><%= account.Currency.code %></td>
+                            <td><%= transfer.info %></td>
+                        </tr>
+                    <% }) %>
 
                 </tbody>
             </table>

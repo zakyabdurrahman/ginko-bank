@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
     info: DataTypes.STRING,
     CurrencyId: DataTypes.INTEGER,
-    AccountId: DataTypes.INTEGER
+    AccountId: DataTypes.INTEGER,
+    ReceiverAccountNumber: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Transfer',
