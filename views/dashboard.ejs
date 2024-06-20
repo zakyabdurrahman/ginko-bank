@@ -75,15 +75,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>123456789</td>
-                            <td>Active</td>
-                            <td>$1000</td>
-                            <td>USD</td>
-                            <td>
-                                <button class="btn btn-info btn-sm">Detail</button>
-                            </td>
-                        </tr>
+                        <% userAccounts.forEach(account => { %>
+                            <tr>
+                                <td><%= account.accountNumber %></td>
+                                <td><%= account.active ? 'active' : 'frozen' %></td>
+                                <td><%= account.amount %></td>
+                                <td><%= account.Currency.code %></td>
+                                <td><a href="/user/account/<%= account.accountNumber %>"><button class="btn btn-primary">Detail</button></a></td>
+                            </tr>
+                        <% }) %>
                     </tbody>
                 </table>
             </div>

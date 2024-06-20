@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ginko Bank - Dashboard</title>
+    <style type="text/css">
+        .btn-primary {
+           float: right;
+           margin-right: 10px; 
+           margin-bottom: 10px; 
+        }
+        .btn-secondary{
+            float: right;
+            margin-right: 10px;
+            margin-bottom: 10px; 
+        }
+        .btn-success{
+            margin-left: 10px;
+        }
+        h3{
+            margin-left: 10px;
+        }
+        p{
+            margin-left: 10px;
+        }
+    </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="mt-4">
+            <h3>Berikut detail rekening anda dengan mata uang <%= account.Currency.name %></h3> <br>
+            <p>Name : <strong><%= bio.fullName %></strong></p>
+            <p>No Rekening: <strong><%= account.accountNumber %></strong></p>
+            <p>Informasi Saldo: <strong><%= account.amount %></strong></p>
+            <p>Currency : <strong><%= account.Currency.name %></strong></p>
+        </div>
+        <br>
+        <button class="btn btn-primary">TopUp</button>
+        <button class="btn btn-primary">Transfer</button>
+            <table class="table table-bordered">
+                <br>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Jenis Transaksi</th>
+                        <th>Jumlah</th>
+                        <th>Kurs</th>
+                        <th>Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <button class="btn btn-success">Download as PDF</button>
+            <a href="/user/dashboard"><button class="btn btn-secondary">Back</button></a>
+            
+        </div>
+    </div>
+</body>
+</html>

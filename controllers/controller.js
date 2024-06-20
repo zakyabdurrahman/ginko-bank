@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
-const {User, Bio, Currency} = require('../models/index');
+const {User, Bio, Currency, Account} = require('../models/index');
+const {generateAccountNumber} = require('../helpers/helpers');
 
 
 class Controller {
@@ -39,8 +40,14 @@ class Controller {
 
     static async renderUserDashboard(req, res) {
         try {
-            const userData = await Bio.findOne({where : {UserId: req.session.user.id}});
-            res.render('dashboard', {userData});
+            const userData = await Bio.findOne({
+                where : {UserId: req.session.user.id},
+            });
+            const userAccounts = await Account.findAll({
+                where: {UserId: req.session.user.id},
+                include: Currency
+            })
+            res.render('dashboard', {userData, userAccounts});
         } catch(error) {
             console.log(error)
             res.send(error)
@@ -130,7 +137,50 @@ class Controller {
     static async addAccount(req, res) {
         try {
             const {CurrencyId} = req.body;
+            const UserId = req.session.user.id;
+            let accountNumber = 0;
+            //generate a uniq account number then check if already exist, if so continue until none
+            accountNumber = String(generateAccountNumber()) 
+            let sameNumber = await Account.findOne({where: {accountNumber}})
+            while (sameNumber) {
+                accountNumber = String(generateAccountNumber()) 
+                sameNumber = await Account.findOne({where: {accountNumber}})
+            }
+
+            //then make the account
+            const newAccount = await Account.create({
+                accountNumber,
+                amount: 0,
+                UserId,
+                CurrencyId,
+                active: true
+            })
             
+
+
+            res.redirect(`/user/dashboard?message=${accountNumber}`)
+            
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
+
+    static async renderDetailAccount(req, res) {
+        try {
+            const {accountNumber} = req.params;
+            const account = await Account.findOne({
+                where: {
+                    accountNumber: accountNumber
+                },
+                include: Currency
+            });
+            const bio = await Bio.findOne({where: {
+                UserId: account.UserId
+            }});
+            //find the user then the bio;
+            
+            res.render('detailAccount', {account, bio});
         } catch(error) {
             console.log(error)
             res.send(error)
