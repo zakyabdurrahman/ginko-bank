@@ -39,7 +39,8 @@ class Controller {
 
     static async renderUserDashboard(req, res) {
         try {
-            res.render('dashboard')
+            const userData = await Bio.findOne({where : {UserId: req.session.user.id}});
+            res.render('dashboard', {userData});
         } catch(error) {
             console.log(error)
             res.send(error)
