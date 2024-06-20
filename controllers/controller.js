@@ -34,6 +34,24 @@ class Controller {
             res.send(error)
         }
     }
+
+    static async renderRegister(req, res) {
+        try {
+            res.render('register');
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
+
+    static async renderHome(req, res) {
+        try {
+            res.render('home');
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
 }
 
 module.exports = Controller;
