@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ginko Bank - Transfer</title>
+    <title>Ginko Bank - Topup</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body, html {
@@ -105,22 +105,19 @@
 </div> 
 
 <div class="container">
-    <h1>Transfer Dana dalam Mata Uang <%= account.Currency.code %></h1>
+    <h1>Top Up Rekening</h1>
+    <p><center>Kurs USD hari ini adalah Rp.14.678</center></p>
     <form>
         <div class="form-group">
             <label for="norek">No Rekening Tujuan</label>
-            <input type="number" id="norek" name="norek" required>
+            <input type="number" id="norek" name="accountNumber" required>
         </div>
         <div class="form-group">
-            <label for="amount">Jumlah</label>
-            <input type="number" id="amount" name="amount" required>
-        </div>
+          <label for="amount">Jumlah</label>
+          <input type="number" id="amount" name="amount" required>
+      </div>
         <div class="form-group">
-            <label for="keterangan">Keterangan</label>
-            <input type="text" id="keterangan" name="keterangan" required>
-        </div>
-        <div class="form-group">
-            <button type="submit">Transfer</button>
+            <button type="submit">Toupup</button>
         </div>
     </form>
 </div>

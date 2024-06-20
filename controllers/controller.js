@@ -186,6 +186,32 @@ class Controller {
             res.send(error)
         }
     }
+
+    static async renderTransfer(req, res) {
+        try {
+            //findout the currency
+            const {accountNumber} = req.params;
+            const account = await Account.findOne({
+                where: {
+                    accountNumber
+                },
+                include: Currency
+            })
+            res.render('formTransfer', {account});
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
+
+    static async renderTopup(req, res) {
+        try {
+            res.render('accountTopup');
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
 }
 
 module.exports = Controller;

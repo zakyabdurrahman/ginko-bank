@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       Account.belongsTo(models.Currency, {
         foreignKey: 'CurrencyId'
       })
+      Account.hasMany(models.Transfer);
     }
   }
   Account.init({

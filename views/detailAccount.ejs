@@ -39,8 +39,10 @@
             <p>Currency : <strong><%= account.Currency.name %></strong></p>
         </div>
         <br>
-        <button class="btn btn-primary">TopUp</button>
-        <button class="btn btn-primary">Transfer</button>
+        <a href="/user/account/<%= account.accountNumber %>/topup"><button class="btn btn-primary">TopUp</button></a>
+        
+        <a href="/user/account/<%= account.accountNumber %>/transfer"><button class="btn btn-primary">Transfer</button></a>
+        
             <table class="table table-bordered">
                 <br>
                 <thead>

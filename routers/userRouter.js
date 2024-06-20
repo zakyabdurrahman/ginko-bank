@@ -8,6 +8,8 @@ router.use(loginMiddleware);
 router.get('/dashboard', Controller.renderUserDashboard);
 router.get('/addAccount', Controller.renderAddAccount);
 router.post('/addAccount', Controller.addAccount);
+router.get('/account/:accountNumber/topup', Controller.renderTopup)
+router.get('/account/:accountNumber/transfer', Controller.renderTransfer);
 router.get('/account/:accountNumber', Controller.renderDetailAccount);
 
 module.exports = router;
