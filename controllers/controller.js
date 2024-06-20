@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const {User, Bio} = require('../models/index');
+const {User, Bio, Currency} = require('../models/index');
 
 
 class Controller {
@@ -111,6 +111,26 @@ class Controller {
                 const message = `user not found`;
                 res.redirect(`/login?error=${message}`);
             }
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
+
+    static async renderAddAccount(req, res) {
+        try {
+            const currencies = await Currency.findAll();
+            res.render('addAccount', {currencies});
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }        
+    }
+
+    static async addAccount(req, res) {
+        try {
+            const {CurrencyId} = req.body;
+            
         } catch(error) {
             console.log(error)
             res.send(error)

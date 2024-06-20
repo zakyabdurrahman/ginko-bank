@@ -6,5 +6,6 @@ const Controller = require('../controllers/controller');
 
 router.use(loginMiddleware);
 router.get('/dashboard', Controller.renderUserDashboard);
+router.get('/addAccount', Controller.renderAddAccount);
 
 module.exports = router;
