@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       })
       Account.hasMany(models.Transfer);
     }
+
+    get formattedAmount() {
+      const separated = this.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      const symbol = this.Currency.symbol;
+      return symbol + separated;
+    }
   }
   Account.init({
     accountNumber: DataTypes.STRING,

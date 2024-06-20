@@ -191,8 +191,10 @@ class Controller {
                 where: {
                     [Op.or]: [{ReceiverAccountNumber: accountNumber}, {AccountId: account.id}]
                 },
+                include: Currency
                 
             });
+            console.log(account.Currency.symbol);
             const file = createPDF(accountNumber, transfers, account.Currency.code);
             
             res.render('detailAccount', {account, bio, transfers, file});

@@ -79,7 +79,7 @@
                             <tr>
                                 <td><%= account.accountNumber %></td>
                                 <td><%= account.active ? 'active' : 'frozen' %></td>
-                                <td><%= account.amount %></td>
+                                <td><%= account.formattedAmount %></td>
                                 <td><%= account.Currency.code %></td>
                                 <td><a href="/user/account/<%= account.accountNumber %>"><button class="btn btn-primary">Detail</button></a></td>
                             </tr>

@@ -15,17 +15,27 @@ function createPDF(accountNumber, transfers, currencyCode) {
 
   doc.pipe(fs.createWriteStream(`./public/${accountNumber}.pdf`));
   doc
-  .fontSize(25)
+  .font('Helvetica-Bold')
+  .fontSize(28)
   .text('GinkoBank');
 
   doc
-  .fontSize(20)
+  .font('Helvetica')
+  .fontSize(18)
+  .text(`No. Rekening ${accountNumber}`);
+
+  
+
+  doc.moveDown()
+
+  doc
+  .fontSize(18)
   .text('Daftar Transfer');
 
   transfers.forEach((transfer, i) => {
     doc
-    .fontSize(18)
-    .text(`${i + 1}  ${transfer.createdAt.toISOString().split('T')[0]}  ${transfer.relativeType(accountNumber)}  ${transfer.amount}  ${currencyCode}  ${transfer.info}`);
+    .fontSize(14)
+    .text(`${i + 1}  ${transfer.createdAt.toISOString().split('T')[0]}  ${transfer.relativeType(accountNumber)}  ${transfer.formattedAmount}  ${currencyCode}  ${transfer.info}`);
   })
 
 

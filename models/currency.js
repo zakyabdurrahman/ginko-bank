@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
   Currency.init({
     name: DataTypes.STRING,
     code: DataTypes.STRING,
-    idrValue: DataTypes.INTEGER
+    idrValue: DataTypes.INTEGER,
+    symbol: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Currency',

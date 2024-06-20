@@ -32,16 +32,25 @@
 </head>
 <body>
         <div class="mt-4">
+            
             <h3>Berikut detail rekening anda dengan mata uang <%= account.Currency.name %></h3> <br>
+            <% if (!account.active) { %>
+                <p style="color: red;">Rekening anda di bekukan oleh Bank. Fitur topup dan transfer dimatikan</p>
+            <% } %>
+            
             <p>Name : <strong><%= bio.fullName %></strong></p>
             <p>No Rekening: <strong><%= account.accountNumber %></strong></p>
-            <p>Informasi Saldo: <strong><%= account.amount %></strong></p>
+            <p>Informasi Saldo: <strong><%= account.formattedAmount %></strong></p>
             <p>Currency : <strong><%= account.Currency.name %></strong></p>
         </div>
         <br>
-        <a href="/user/account/<%= account.accountNumber %>/topup"><button class="btn btn-primary">TopUp</button></a>
+        <% if (account.active) { %>
+            <a href="/user/account/<%= account.accountNumber %>/topup"><button class="btn btn-primary">TopUp</button></a>
+            <a href="/user/account/<%= account.accountNumber %>/transfer"><button class="btn btn-primary">Transfer</button></a>
+        <% } %>
         
-        <a href="/user/account/<%= account.accountNumber %>/transfer"><button class="btn btn-primary">Transfer</button></a>
+        
+        
         
             <table class="table table-bordered">
                 <br>
@@ -61,7 +70,7 @@
                             <td><%= i + 1 %></td>
                             <td><%= transfer.createdAt %></td>
                             <td><%= transfer.relativeType(account.accountNumber) %></td>
-                            <td><%= transfer.amount %></td>
+                            <td><%= transfer.formattedAmount %></td>
                             <td><%= account.Currency.code %></td>
                             <td><%= transfer.info %></td>
                         </tr>

@@ -16,22 +16,26 @@ module.exports = {
       {
         name: 'Indonesian Rupiah',         
         code: 'IDR',
-        idrValue: 1
+        idrValue: 1,
+        symbol: 'Rp'
       },
       {
         name: 'United States Dollar',
         code: 'USD',
-        idrValue: 16410
+        idrValue: 16410,
+        symbol: '$'
       },
       {
         name: 'Japanese Yen',
         code: 'JPY',
-        idrValue: 103
+        idrValue: 103,
+        symbol: '¥'
       },
       {
         name: 'Euro',
         code: 'EUR',
-        idrValue: 17633
+        idrValue: 17633,
+        symbol: '€'
       },
     ]
     await queryInterface.bulkInsert('Currencies', data.map((item) => {

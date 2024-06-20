@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       Transfer.belongsTo(models.Account)
     }
 
+    get formattedAmount() {
+      const separated = this.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      const symbol = this.Currency.symbol;
+      return symbol + separated;
+    }
+
     relativeType(viewerAccountNumber) {
       if (this.ReceiverAccountNumber === viewerAccountNumber) {
         return 'Pemasukan';
