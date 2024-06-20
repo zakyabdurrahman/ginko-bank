@@ -1,0 +1,24 @@
+
+
+[{
+  "email": "john.doe@ginkobank.com",
+  "password": "sQ5/D8s)W9bvn6",
+  "role": "admin"
+}, {
+  "email": "jane.smith@ginkobank.com",
+  "password": "dB9<jIh2jCqk4U",
+  "role": "user"
+}, {
+  "email": "mary.brown@ginkobank.com",
+  "password": "nV0)y<C=Ceyzf",
+  "role": "admin"
+}, {
+  "email": "robert.johnson@ginkobank.com",
+  "password": "lX3#f\"Dv0&Xi",
+  "role": "user"
+}, {
+  "email": "alice.wong@ginkobank.com",
+  "password": "12345",
+  "role": "user"
+
+}]

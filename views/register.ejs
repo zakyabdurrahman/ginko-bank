@@ -95,7 +95,7 @@
 
 <div class="container">
     <h1>Registrasi</h1>
-    <form>
+    <form method="post" action="/register">
         <div class="form-group">
             <label for="register-email">Nama Lengkap</label>
             <input type="text" id="name" name="name" required>
@@ -106,7 +106,7 @@
         </div>
         <div class="form-group">
           <label for="dob">Taggal Lahir</label>
-          <input type="date" id="dob" name="dob" required>
+          <input type="date" id="dob" name="dateOfBirth" required>
         </div>
         <div class="form-group">
           <label for="address">Alamat</label>
@@ -114,7 +114,7 @@
         </div>
         <div class="form-group">
           <label for="phone number">No telp</label>
-          <input type="number" id="phone number" name="phone number" required>
+          <input type="number" id="phone number" name="phoneNumber" required>
         </div>
         <div class="form-group">
             <label for="register-password">Password</label>

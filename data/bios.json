@@ -1,0 +1,37 @@
+[
+  {
+      "fullName": "John Doe",
+      "dateOfBirth": "1990-05-15",
+      "address": "123 Main St",
+      "phoneNumber": "081309834261",
+      "UserId": 1
+  },
+  {
+    "fullName": "Margareth",
+    "dateOfBirth": "1993-08-25",
+    "address": "28 Loco St",
+    "phoneNumber": "085678234567",
+    "UserId": 2
+  },
+  {
+    "fullName": "Ashley",
+    "dateOfBirth": "1998-07-21",
+    "address": "78 Bolevard St",
+    "phoneNumber": "081315780923",
+    "UserId": 3
+  },
+  {
+    "fullName": "Danish",
+    "dateOfBirth": "1992-05-15",
+    "address": "Depok",
+    "phoneNumber": "081516167890",
+    "UserId": 4
+  },
+  {
+    "fullName": "Ragil Mahardika",
+    "dateOfBirth": "1991-03-08",
+    "address": "11 Jhanson St",
+    "phoneNumber": "081345909032",
+    "UserId": 5
+  }
+]
