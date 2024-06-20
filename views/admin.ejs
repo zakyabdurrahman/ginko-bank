@@ -85,7 +85,8 @@
                                 <td><%= account.Currency.code %></td>
                                 <td><%= account.active ? 'Active' : 'Suspended' %></td>
                                 <td><% if (account.active) { %>
-                                    <button class="btn btn-danger">Suspend</button>
+                                    <a href="/admin/suspend/<%= account.id %>"><button class="btn btn-danger">Suspend</button></a>
+                                    
                                 <% } %></td>
                             </tr>
                             

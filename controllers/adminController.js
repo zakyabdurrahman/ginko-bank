@@ -19,6 +19,24 @@ class AdminController {
             res.send(error)
         }
     }
+
+    static async suspendAccount(req, res) {
+        try {
+            const {accountId} = req.params;
+            const account = await Account.update(
+                {active: false},
+                {
+                    where: {
+                        id: accountId
+                    }
+                }
+            )
+            res.redirect('/admin/dashboard')
+        } catch(error) {
+            console.log(error)
+            res.send(error)
+        }
+    }
 }
 
 module.exports = AdminController;

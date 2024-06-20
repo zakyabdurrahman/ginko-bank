@@ -6,5 +6,6 @@ const AdminController = require('../controllers/adminController');
 
 router.use(loginMiddleware);
 router.get('/dashboard', AdminController.renderDashboard);
+router.get('/suspend/:accountId', AdminController.suspendAccount);
 
 module.exports = router
