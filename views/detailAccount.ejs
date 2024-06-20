@@ -60,7 +60,7 @@
                         <tr>
                             <td><%= i + 1 %></td>
                             <td><%= transfer.createdAt %></td>
-                            <td><%= transfer.type %></td>
+                            <td><%= transfer.relativeType(account.accountNumber) %></td>
                             <td><%= transfer.amount %></td>
                             <td><%= account.Currency.code %></td>
                             <td><%= transfer.info %></td>
@@ -69,7 +69,8 @@
 
                 </tbody>
             </table>
-            <button class="btn btn-success">Download as PDF</button>
+            <a href="/<%= file %>"><button class="btn btn-success">Download as PDF</button></a>
+            
             <a href="/user/dashboard"><button class="btn btn-secondary">Back</button></a>
             
         </div>

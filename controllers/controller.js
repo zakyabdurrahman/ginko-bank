@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const {User, Bio, Currency, Account, Transfer} = require('../models/index');
-const {generateAccountNumber} = require('../helpers/helpers');
+const {generateAccountNumber, createPDF} = require('../helpers/helpers');
 const {Op} = require('sequelize');
+
 
 
 class Controller {
@@ -107,7 +108,13 @@ class Controller {
                         id: user.id,
                         role: user.role
                     };
-                    res.redirect('/user/dashboard')
+                    //diffrent handling between admin and user
+                    if (user.role === "user") {
+                        res.redirect('/user/dashboard');
+                    } else {
+                        res.redirect('/admin/dashboard');
+                    }
+                    
                 }
                 else {
                     const message = `wrong password`
@@ -183,9 +190,12 @@ class Controller {
             const transfers = await Transfer.findAll({
                 where: {
                     [Op.or]: [{ReceiverAccountNumber: accountNumber}, {AccountId: account.id}]
-                }
+                },
+                
             });
-            res.render('detailAccount', {account, bio, transfers});
+            const file = createPDF(accountNumber, transfers, account.Currency.code);
+            
+            res.render('detailAccount', {account, bio, transfers, file});
         } catch(error) {
             console.log(error)
             res.send(error)

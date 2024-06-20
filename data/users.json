@@ -1,8 +1,8 @@
 
 
 [{
-  "email": "john.doe@ginkobank.com",
-  "password": "sQ5/D8s)W9bvn6",
+  "email": "ahmet@ginkobank.com",
+  "password": "postgres",
   "role": "admin"
 }, {
   "email": "jane.smith@ginkobank.com",

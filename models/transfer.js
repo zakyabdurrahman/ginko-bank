@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       })
       Transfer.belongsTo(models.Account)
     }
+
+    relativeType(viewerAccountNumber) {
+      if (this.ReceiverAccountNumber === viewerAccountNumber) {
+        return 'Pemasukan';
+      } else {
+        return 'Pengeluaran';
+      }
+    }
   }
   Transfer.init({
     amount: DataTypes.INTEGER,
@@ -28,5 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Transfer',
   });
+  Transfer.addHook('beforeCreate', async (transfer, options) => {
+    const account = await transfer.getAccount();
+    transfer.info = `Transfer dari ${account.accountNumber} ke ${transfer.ReceiverAccountNumber}. ${transfer.info}`;
+  })
   return Transfer;
 };
