@@ -78,7 +78,7 @@ class Controller {
 
     static async renderHome(req, res) {
         try {
-            res.render('home');
+            res.render('home1');
         } catch(error) {
             console.log(error)
             res.send(error)
@@ -269,7 +269,8 @@ class Controller {
             const account = await Account.findOne({
                 where: {
                     accountNumber
-                }
+                },
+                include: Currency
             })
             const targetAccount = await Account.findOne({
                 where: {
@@ -281,7 +282,14 @@ class Controller {
             if (!targetAccount) {
                 const message = "No Rekening tidak ditemukan";
                 res.redirect(`/user/account/${accountNumber}/transfer?error=${message}`);
-            } else if (amount > account.amount) {
+            } else if (targetAccount.Currency.code !== account.Currency.code) {
+                const message = "Rekening berbeda kurs";
+                res.redirect(`/user/account/${accountNumber}/transfer?error=${message}`)
+            } else if (!targetAccount.active) {
+                const message = "Rekening tujuan telah dibekukan";
+                res.redirect(`/user/account/${accountNumber}/transfer?error=${message}`)
+            }
+            else if (amount > account.amount) {
                 const message = "Saldo anda tidak mencukupi";
                 res.redirect(`/user/account/${accountNumber}/transfer?error=${message}`);
             } else {
